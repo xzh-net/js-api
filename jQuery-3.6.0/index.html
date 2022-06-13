@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="jquery-3.6.0.min.js"></script>
+    </head>
+<body>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                url:"http://ddd.vjsp.cn/brand/create",//路径
+                data: JSON.stringify({'bigPic':'','logo':'','name':'aaa',}),
+                contentType : 'application/json;charset=utf-8',
+                success: function (res) {
+                    alert(res.message);
+                },
+                error: function (res) {
+                    alert(res.message);
+                }
+            });
+        })
+</script>
+</body>
+
+</html>

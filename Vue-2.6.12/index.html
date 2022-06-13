@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak]{
+            display: none
+        }
+    </style>
+    <script src="vue.js"></script>
+    <script>
+        for(let i=0;i<3;i++){
+            setTimeout(() => {
+               // alert(i);
+            }, 1000);
+        }
+        console.log(i);
+    </script>
+</head>
+
+<body>
+    
+    <div id="app">
+        <input type="text" v-model:value="message">
+        <input type="text" :value="message2">
+        <p v-cloak>{{message}}</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue1111',
+                message2: 'Hello 333'
+            },
+            beforeMount:function(){
+                alert("确定执行")
+            }
+        })
+    </script>
+</body>
+
+</html>
