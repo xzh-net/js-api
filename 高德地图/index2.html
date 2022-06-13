@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>关键字查询自我展示</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/AMap.PlaceSearchRender1120.css"/>
+    <style>
+        #panel {
+            z-index: 999;
+            position: absolute;
+            background-color: white;
+            max-height: 100%;
+            overflow-y: auto;
+            right: 0;
+            width: 280px;
+        }
+    </style>
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode:'4c37488c9b5e00278bce282005a6af7b',
+        }
+	</script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=5c8c85e5547ab91cf0b05f93a18dbc74&plugin=AMap.PlaceSearch"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/PlaceSearchRender.js"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<div id="panel"></div>
+<script type="text/javascript">
+    var map = new AMap.Map("container", {
+        city: "大连",
+        zoom: 11,
+        resizeEnable: true
+    });
+    var placeSearch = new AMap.PlaceSearch({
+      // city 指定搜索所在城市，支持传入格式有：城市名、citycode和adcode
+      city: '大连'
+    })
+
+    placeSearch.search('高新万达', function (status, result) {
+       // 查询成功时，result即对应匹配的POI信息
+       console.log(result)
+       var pois = result.poiList.pois;
+        for(var i = 0; i < pois.length; i++){
+            var poi = pois[i];
+            var marker = [];
+            marker[i] = new AMap.Marker({
+                position: poi.location,   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+                title: poi.name
+            });
+            // 将创建的点标记添加到已有的地图实例：
+            map.add(marker[i]);
+        }
+        map.setFitView();
+    });
+
+</script>
+</body>
+</html>
